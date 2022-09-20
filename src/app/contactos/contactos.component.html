@@ -1,0 +1,67 @@
+<h2>{{titulo | uppercase}}:</h2>
+<br>
+<div class="container">
+  <div *ngFor="let contacto of contactos" class="container row">
+    <button class="btn btn-outline-info col-md-3" [class.selected]="contacto === selectedContacto" type="button"
+      (click)="onSelect(contacto)" data-bs-toggle="modal"
+      data-bs-target="#staticBackdrop">{{contacto.apellido |uppercase}}, {{contacto.nombre | uppercase}}
+    </button>
+  </div>
+</div>
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">{{selectedContacto?.apellido}}, {{selectedContacto?.nombre}}
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div ngFor="let contacto of contactos">
+          <ul *ngIf="selectedContacto">
+            <li>{{selectedContacto.nombre}} {{selectedContacto.apellido}}</li>
+            <li>{{selectedContacto.telefono}}</li>
+            <li>{{selectedContacto.correo}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+<br>
+<div class="container">
+  <form action="">
+    <div class="row">
+      <div class="col form-floating mb-3">
+        <input type="text" name="nombre" id="nombre" placeholder="Nombre" [(ngModel)]="campoNombre" class="form-control" id="floatingInput">
+        <label for="floatingInput">Nombre:</label>
+      </div>
+      <br>
+      <div class="col form-floating mb-3">
+        <input type="text" name="apellido" id="apellido" placeholder="Apellido" [(ngModel)]="campoApellido" class="form-control" id="floatingInput">
+        <label for="floatingInput">Apellido:</label>
+      </div>
+    </div>
+    
+    <br>
+    <div class="row">
+        <div class="col form-floating mb-3">
+        <input type="tel" name="telefono" id="telefono" placeholder="Telefono" [(ngModel)]="campoTelefono" class="form-control" id="floatingInput">
+        <label for="floatingInput">Telefono:</label>
+      </div>
+      <br>
+      <div class="col form-floating mb-3">
+        <input type="email" name="correo" id="correo" placeholder="Correo Electrónico" [(ngModel)]="campoCorreo" class="form-control" id="floatingInput">
+        <label for="floatingInput">Correo:</label>
+      </div>
+    </div>
+    <br>
+    <div class="d-grid gap-2">
+      <button type="submit" (click)="agregarContacto()" class="btn btn-primary">GUARDAR</button>
+    </div>
+  </form>
+</div>
